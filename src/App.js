@@ -88,11 +88,7 @@ function Chatroom() {
   }, []);
 
   const getChatRoomMsgs = async () => {
-    // const messageRef = collection(db, "messages");
-    // const queriedMessages = await getDocs(messageRef, orderBy("createdAt"));
-
     const q = query(messageRef, orderBy("createdAt", "desc"), limit(25));
-
     const queriedMessages = await getDocs(q);
     var messageList = [];
 
