@@ -2,8 +2,14 @@
 import "./App.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-// import { getFirestore } from "firebase/firestore";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  // onAuthStateChanged,
+} from "firebase/auth";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { useState, useEffect } from "react";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,11 +26,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
-// const db = getFirestore(app);
+const db = getFirestore(app);
 
 function App() {
   const [user] = useAuthState(auth);
-  // console.log(user.displayName);
 
   return (
     <div className="App">
@@ -63,6 +68,25 @@ function SignOut() {
 }
 
 function Chatroom() {
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    const getChatRoomMsgs = async () => {
+      const messageRef = collection(db, "messages");
+      const queriedMessages = await getDocs(messageRef);
+      // queriedMessages.forEach((doc) => {
+      //   // // doc.data() is never undefined for query doc snapshots
+      //   console.log(doc.data().text);
+      //   // setMessages((messages) => [...messages, doc.data().text]);
+      // });
+      console.log(queriedMessages);
+    };
+
+    getChatRoomMsgs();
+
+    console.log("hiio" + messages);
+  });
+
   return <div>start chattin</div>;
 }
 
