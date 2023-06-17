@@ -1,56 +1,57 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import { useAuthState } from "react-firebase-hooks/auth";
-// import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
-  onAuthStateChanged,
   // onAuthStateChanged,
 } from "firebase/auth";
 
 import app from "./config";
 import Chatroom from "./ChatRoom";
-import { useEffect } from "react";
 
 const auth = getAuth(app);
-// var user = auth.currentUser;
 
 function App() {
   // const user = auth.currentUser;
   const [user] = useAuthState(auth);
 
+  //TODO, remove the import useAuthState and use inbuilt auth hook instead, onAuthStateChanged
   return (
-    <div className="App">
-      <header className="text-3xl font-bold underline">
-        Welcome to my anonymous Chat app
-        <SignOut></SignOut>
+    <div className="container max-w-5xl px-24 mx-auto max-h-screen grid grid-rows-12">
+      <header className="flex align-center border-gray-950 bg-davygray border-b-4 py-2 row-span-1 h-14 text-center bg-white">
+        <h1 className="text-3xl font-bold ">ヽ(*⌒∇⌒*)ﾉ</h1>
+        {user ? <SignOut /> : <SignIn />}
       </header>
 
-      <section>{user ? <Chatroom /> : <SignIn />}</section>
+      <section className="row-span-11 pb-1">
+        {user ? <Chatroom /> : <About />}
+      </section>
+    </div>
+  );
+}
+
+function About() {
+  return (
+    <div>
+      <h2>This is my Anonymous Chat App, sign in with google to continue</h2>
     </div>
   );
 }
 
 function SignIn() {
   // sign in with popup
-
-  useEffect(() => {
-    console.log("react dev moment");
-  }, []);
-
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).catch((err) => {
       console.log("Please try again");
     });
-    // user = auth.currentUser;
   };
 
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+      className="bg-rosequarts ml-auto font-bold py-2 px-4 bg-lime-400 text-center"
       onClick={signInWithGoogle}
     >
       Sign in with Google
@@ -60,7 +61,14 @@ function SignIn() {
 
 function SignOut() {
   return (
-    auth.currentUser && <button onClick={() => auth.signOut()}>Sign Out</button>
+    auth.currentUser && (
+      <button
+        onClick={() => auth.signOut()}
+        className="bg-rosequarts ml-auto font-bold py-2 px-4 bg-lime-400 text-center"
+      >
+        Sign Out
+      </button>
+    )
   );
 }
 
