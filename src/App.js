@@ -20,7 +20,7 @@ function App() {
   //TODO, remove the import useAuthState and use inbuilt auth hook instead, onAuthStateChanged
   return (
     <div className="container max-w-5xl px-24 mx-auto max-h-screen grid grid-rows-12">
-      <header className="flex align-center border-gray-950 bg-davygray border-b-4 py-2 row-span-1 h-14 text-center bg-white">
+      <header className="flex align-center border-gray-950 bg-davygray border-b-4 py-2 row-span-1 h-14 text-center">
         <h1 className="text-3xl font-bold ">ヽ(*⌒∇⌒*)ﾉ</h1>
         {user ? <SignOut /> : <SignIn />}
       </header>
@@ -64,9 +64,9 @@ function SignOut() {
     auth.currentUser && (
       <button
         onClick={() => auth.signOut()}
-        className="bg-rosequarts ml-auto font-bold py-2 px-4 bg-lime-400 text-center"
+        className="ml-auto font-bold py-2 px-4 bg-lime-400 text-center"
       >
-        Sign Out
+        Sign Out :)
       </button>
     )
   );

@@ -54,36 +54,39 @@ function Chatroom() {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    const { uid } = auth.currentUser;
-    //add document to the messages collection
-    await addDoc(messageRef, {
-      text: formValue,
-      createdAt: serverTimestamp(),
-      uid,
-    });
-    setFormValue(""); //clear form
 
-    scrollDummy.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+    if (formValue !== "") {
+      const { uid } = auth.currentUser;
+      //add document to the messages collection
+      await addDoc(messageRef, {
+        text: formValue,
+        createdAt: serverTimestamp(),
+        uid,
+      });
+      setFormValue(""); //clear form
+
+      scrollDummy.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
   };
 
   return (
     <div className="grid grid-rows-16 max-h-full">
-      <div className="overflow-auto row-span-15">
+      <div className="overflow-auto row-span-15 ">
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
         <div ref={scrollDummy}></div>
       </div>
 
-      <form onSubmit={sendMessage} className="flex row-span-1">
+      <form onSubmit={sendMessage} className="flex row-span-1 h-10">
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          className="block p-2.5 w-full text-sm text-gray-900 border border-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block p-2.5 w-full text-sm text-gray-900 border border-gray-900 focus:ring-yellow-500 focus:border-yellow-500 "
         />
         <button
           type="submit"
@@ -102,9 +105,7 @@ function ChatMessage(props) {
 
   return (
     <>
-      <div className={`${messageClass}`}>
-        <p> {text} </p>
-      </div>
+      <div className={`${messageClass}`}>{text}</div>
     </>
   );
 }
