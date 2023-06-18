@@ -3,8 +3,19 @@
 @tailwind utilities;
 
 .sent {
-  color: red;
+  /* ALIGN SELF DOES THE SORT FROM LEFT TO RIGHT */
+  align-self: flex-end;
+  text-align: right;
+  margin-left: 15%;
+  background-color: #22c55e;
+  color: white;
+  border-radius: 20px 20px 0px 20px;
 }
 .received {
-  color: green;
+  align-self: flex-start;
+  background-color: #e7e5e4;
+  color: black;
+  border-radius: 20px 20px 20px 0px;
+  margin-right: 15%;
+  /* background-color: red; */
 }

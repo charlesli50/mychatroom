@@ -53,7 +53,7 @@ function SignIn() {
 
   return (
     <button
-      className="bg-rosequarts ml-auto font-bold py-2 px-4 bg-lime-400 text-center"
+      className="bg-rosequarts ml-auto my-auto font-bold py-2 px-4 bg-lime-400 text-center"
       onClick={signInWithGoogle}
     >
       Sign In :)
@@ -66,7 +66,7 @@ function SignOut() {
     auth.currentUser && (
       <button
         onClick={() => auth.signOut()}
-        className="ml-auto font-bold py-2 px-4 bg-lime-400 text-center"
+        className="ml-auto font-bold py-2 px-4 bg-lime-400 text-center my-auto"
       >
         Sign Out :)
       </button>

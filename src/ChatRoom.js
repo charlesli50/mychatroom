@@ -37,6 +37,15 @@ function Chatroom() {
     };
   }, []);
 
+  // second useEffect for scrolling properly?
+  useEffect(() => {
+    scrollDummy.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    });
+  }, [messages]);
+
   const getChatRoomMsgs = async () => {
     const q = query(messageRef, orderBy("createdAt", "desc"), limit(25));
     const queriedMessages = await getDocs(q).catch((err) => {
@@ -64,18 +73,12 @@ function Chatroom() {
         uid,
       });
       setFormValue(""); //clear form
-
-      scrollDummy.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
     }
   };
 
   return (
     <div className="grid grid-rows-16 max-h-full">
-      <div className="overflow-auto row-span-15 ">
+      <div className="overflow-auto row-span-15 flex flex-col gap-y-1">
         {messages &&
           messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
@@ -86,11 +89,11 @@ function Chatroom() {
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          className="block p-2.5 w-full text-sm text-gray-900 border border-gray-900 focus:ring-yellow-500 focus:border-yellow-500 "
+          className="block p-2.5 w-full text-sm text-gray-900 border-2 border-gray-900 focus:ring-emerald-700 focus:border-emerald-700 focus:outline-none"
         />
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 w-32"
+          className="bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-2 px-4 border-b-2 border-emerald-700 hover:border-emerald-500 w-32"
         >
           send :)
         </button>
@@ -105,7 +108,9 @@ function ChatMessage(props) {
 
   return (
     <>
-      <div className={`${messageClass}`}>{text}</div>
+      <div className={`${messageClass} text-sm mr-3 ml-3 px-2 py-1`}>
+        {text}
+      </div>
     </>
   );
 }
