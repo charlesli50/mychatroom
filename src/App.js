@@ -36,8 +36,15 @@ function App() {
 
 function About() {
   return (
-    <div>
-      <h2>This is my Anonymous Chat App, sign in with google to continue</h2>
+    <div className="text-center mt-24 text-lg">
+      <h2>A small, humble, anonymous Chat Room App project, for my friends</h2>
+      <p>( ˶ˆᗜˆ˵ )</p>
+      <p>♡⸜(˶˃ ᵕ ˂˶)⸝♡</p>
+      <p>໒꒰ྀི´ ˘ ` ꒱ྀིა</p>
+      <p>( ꩜ ᯅ ꩜;)⁭ ⁭</p>
+      <p>૮(˶╥︿╥)ა</p>
+      <p>(_ _ ) . . z Z</p>
+      <p>૮₍ ˃ ⤙ ˂ ₎ა</p>
     </div>
   );
 }
