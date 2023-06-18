@@ -36,7 +36,7 @@ function App() {
 
 function About() {
   return (
-    <div className="text-center mt-24 text-lg">
+    <div className="text-center mt-20 text-lg flex gap-4 flex-col">
       <h2>A small, humble, anonymous Chat Room App project, for my friends</h2>
       <p>( ˶ˆᗜˆ˵ )</p>
       <p>♡⸜(˶˃ ᵕ ˂˶)⸝♡</p>

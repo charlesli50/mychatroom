@@ -19,3 +19,14 @@
   margin-right: 15%;
   /* background-color: red; */
 }
+
+.sentID {
+  align-self: flex-end;
+  text-align: right;
+  margin-right: 0.75rem;
+}
+
+.receivedID {
+  align-self: flex-start;
+  margin-left: 0.75rem;
+}

@@ -20,6 +20,7 @@ const messageRef = collection(db, "messages");
 
 function Chatroom() {
   const [messages, setMessages] = useState([]); //the collection of messages
+  // const [ids, setIds] = useState([]); //the collection of messages with the UIDS, for less confusion
   const [formValue, setFormValue] = useState("");
 
   const scrollDummy = useRef();
@@ -36,7 +37,6 @@ function Chatroom() {
       unsubscribe(); //detach snapshot listener when after chatroom is unrendered
     };
   }, []);
-
   // second useEffect for scrolling properly?
   useEffect(() => {
     scrollDummy.current.scrollIntoView({
@@ -59,6 +59,9 @@ function Chatroom() {
     });
 
     setMessages(messageList.reverse());
+    // for(var i = 0; i < 25; i++){
+    //   if(messages[i])
+    // }
   };
 
   const sendMessage = async (e) => {
@@ -78,9 +81,25 @@ function Chatroom() {
 
   return (
     <div className="grid grid-rows-16 max-h-full">
-      <div className="overflow-auto row-span-15 flex flex-col gap-y-1">
-        {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+      <div className="overflow-auto row-span-15 flex flex-col gap-y-0.5">
+        {messages && //WHAT THE FUCK IS THIS LMFAOOOOO
+          messages.map((msg, index) => (
+            <>
+              <div
+                className={`text-xs text-slate-500 ${
+                  auth.currentUser.uid === msg.uid ? "sentID" : "receivedID"
+                }`}
+              >
+                {index > 0 &&
+                  (messages[index - 1].uid === msg.uid ? (
+                    <></>
+                  ) : (
+                    msg.uid.substring(0, 3)
+                  ))}
+              </div>
+              <ChatMessage key={msg.id} message={msg} />
+            </>
+          ))}
 
         <div ref={scrollDummy}></div>
       </div>
@@ -108,6 +127,7 @@ function ChatMessage(props) {
 
   return (
     <>
+      {/* {previd === uid ? uid : <></>} */}
       <div className={`${messageClass} text-sm mr-3 ml-3 px-2 py-1`}>
         {text}
       </div>
