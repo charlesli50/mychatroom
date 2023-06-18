@@ -82,13 +82,13 @@ function Chatroom() {
   return (
     <div className="grid grid-rows-16 max-h-full">
       <div className="overflow-auto row-span-15 flex flex-col gap-y-0.5">
-        <div
+        {/* <div
           className={`text-xs text-slate-500 ${
             auth.currentUser.uid === messages[0].uid ? "sentID" : "receivedID"
           }`}
         >
           {messages[0] && messages[0].uid.substring(0, 4)}
-        </div>
+        </div> */}
         {messages && //WHAT THE FUCK IS THIS LMFAOOOOO
           messages.map((msg, index) => (
             <>
